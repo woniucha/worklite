@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+	>
+
+<bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+<property name="url" value="jdbc:oracle:thin:@128.32.184.52:1526:orcl"/>
+<property name="username" value="worklite"/>
+<property name="password" value="admin"/>
+</bean>
+	<!-- 配置Jdbc模板 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="datasource"></property>
+	</bean>
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="datasource" />
+
+	<!-- 通过AOP配置提供事务增强，让service包下所有Bean的所有方法拥有事务 -->
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="serviceMethod"
+			expression=" execution(* com.service..*(..))" />
+		<aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice" />
+	</aop:config>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+
+                                <!-- 定义数据库操作层 -->
+<bean id="worklite_userdao" class="wtyw.worklite.dao.WorkliteUserDao">
+	<property name="datasource" ref="datasource"></property>
+</bean>
+<bean id="worklite_userinfodao" class="wtyw.worklite.dao.WorkliteUserInfoDao">
+	<property name="datasource" ref="datasource"></property>
+</bean>
+<bean id="worklite_knowledgedao" class="wtyw.worklite.dao.WorkliteKnowledgeDao">
+	<property name="datasource" ref="datasource"></property>
+</bean>
+<bean id="worklitetokendao" class="wtyw.worklite.dao.WorkliteTokenDao">
+	<property name="datasource" ref="datasource"></property>
+</bean>
+<bean id="worklite_vacationdao" class="wtyw.worklite.dao.WorkliteVacationDao">
+	<property name="datasource" ref="datasource"></property>
+</bean>
+<bean id="worklite_bookdao" class="wtyw.worklite.dao.WorkliteBookDao">
+	<property name="datasource" ref="datasource"></property>
+</bean>
+
+<bean id="worklite_taskdao" class="wtyw.worklite.dao.WorkliteTaskDao">
+	<property name="datasource" ref="datasource"></property>
+</bean>
+<bean id="workliteCheckDao" class="wtyw.worklite.dao.WorkliteCheckDao">
+	<property name="datasource" ref="datasource"></property>
+</bean>
+<bean id="workliteReportDao" class="wtyw.worklite.dao.WorkliteReportDao">
+	<property name="datasource" ref="datasource"></property>
+</bean>
+
+                                 <!-- 定义Service层 -->
+<!-- 用户 -->
+<bean id="userService" class="wtyw.worklite.service.UserService">
+	<property name="userDao" ref="worklite_userdao"></property>
+</bean>
+<bean id="userinfoservice" class="wtyw.worklite.service.UserInfoService">
+	<property name="worklite_userinfodao" ref="worklite_userinfodao"></property>
+	<property name="worklite_userdao" ref="worklite_userdao"></property>
+	<property name="worklite_userlogin" ref="workliteuserlogin"></property>
+	<property name="workliteuserinfo" ref="workliteuserinfo"></property>
+	<property name="userDao" ref="worklite_userdao"></property>
+</bean>
+<!-- 令牌 -->
+<bean id="tokenService" class="wtyw.worklite.service.TokenService">
+	<property name="workliteTokenDao" ref="worklitetokendao"></property>
+</bean>
+<!-- 知识 -->
+<bean id="knowledgeService" class="wtyw.worklite.service.KnowledgeService">
+	<property name="worklite_knowledgedao" ref="worklite_knowledgedao"></property>
+</bean>
+<!-- 请假 -->
+<bean id="vacationService" class="wtyw.worklite.service.VacationService">
+	<property name="worklite_vacationdao" ref="worklite_vacationdao"></property>
+</bean>
+<!-- 图书 -->
+<bean id="bookService" class="wtyw.worklite.service.BookService">
+	<property name="workliteBookDao" ref="worklite_bookdao"></property>
+</bean>
+<!-- 任务 -->
+<bean id="taskService" class="wtyw.worklite.service.TaskService">
+	<property name="workliteTaskDao" ref="worklite_taskdao"></property>
+	<property name="taskEnclosure" ref="workliteTaskEnclosure"></property>
+</bean>
+<!-- 考勤 -->
+<bean id="checkService" class="wtyw.worklite.service.CheckService">
+	<property name="workliteCheckDao" ref="workliteCheckDao"></property>
+</bean>
+<!-- 日报月报 -->
+<bean id="reportService" class="wtyw.worklite.service.ReportService">
+	<property name="workliteReportDao" ref="workliteReportDao"></property>
+</bean>
+
+                                  <!-- 定义实体对象 -->
+     <!-- 用户注册登录 -->
+     <bean id="workliteuserlogin" class="wtyw.worklite.beans.WorkliteUserLogin" scope="prototype"></bean>
+     <!-- 用户增加修改 -->
+     <bean id="workliteuserinfo" class="wtyw.worklite.beans.WorkliteUserInfo" scope="prototype"></bean>
+     <!-- 令牌 -->
+     <bean id="worklitetoken" class="wtyw.worklite.beans.WorkliteToken" scope="prototype"></bean>
+     <!-- 知识 -->
+     <bean id="workliteknowledge" class="wtyw.worklite.beans.WorkliteKnowledge" scope="prototype"></bean>
+     <!-- 请假 -->
+     <bean id="worklitevacation" class="wtyw.worklite.beans.WorkliteVacation" scope="prototype"></bean>
+     <!-- 图书 -->
+     <bean id="worklitebook" class="wtyw.worklite.beans.WorkliteBook" scope="prototype"></bean>
+     <!-- 任务 -->
+     <bean id="worklitetask" class="wtyw.worklite.beans.WorkliteTask" scope="prototype"></bean>
+     <!-- 任务附件 -->
+     <bean id="workliteTaskEnclosure" class="wtyw.worklite.beans.WorkliteTaskEnclosure" scope="prototype"></bean>
+     <!-- 周报、月报 -->
+     <bean id="worklitereportweekly" class="wtyw.worklite.beans.WorkliteReportWeekly" scope="prototype"></bean>
+     <bean id="worklitereportmonth" class="wtyw.worklite.beans.WorkliteReportMonth" scope="prototype"></bean>
+     
+                                 <!-- 定义Atciton对象 -->
+     <!-- 知识 -->
+     <bean id="knowledgeAction" class="wtyw.worklite.action.WorkliteKnowledgeAction" scope="prototype">
+           <property name="knowledgeService" ref="knowledgeService"></property>
+           <property name="userService" ref="userService"></property>           
+     </bean>
+     <!-- 任务 -->
+     <bean id="taskAction" class="wtyw.worklite.action.WorkliteTaskAction" scope="prototype">
+           <property name="taskService" ref="taskService"></property>
+           <property name="userService" ref="userService"></property>           
+     </bean>
+     
+     <!-- 用户 -->
+     <bean id="usertAction" class="wtyw.worklite.action.WorkliteUserAction" scope="prototype">
+           <property name="userinfoservice" ref="userinfoservice"></property>
+           <property name="workliteuserlogin" ref="workliteuserlogin"></property>           
+           <property name="workliteuserinfo" ref="workliteuserinfo"></property>           
+           <property name="userService" ref="userService"></property>           
+           <property name="worklite_userinfodao" ref="worklite_userinfodao"></property>           
+     </bean>
+     <!-- 图书-->   
+     <bean id="bookAction" class="wtyw.worklite.action.WorkliteBookAction" scope="prototype">  
+           <property name="bookService" ref="bookService"></property>          
+     </bean>
+   
+                                 <!-- 定义Common对象 -->
+     <!-- 上传组件 -->
+     <bean id="upload" class="wtyw.worklite.common.Upload" scope="prototype">
+           <property name="workliteCheckDao" ref="workliteCheckDao"></property>          
+     </bean>
+     
+</beans>

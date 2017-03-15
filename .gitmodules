@@ -1,0 +1,3 @@
+[submodule "worklite"]
+	path = worklite
+	url = https://github.com/woniucha/worklite.git

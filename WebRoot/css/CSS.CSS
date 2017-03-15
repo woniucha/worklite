@@ -1,0 +1,75 @@
+
+a.a1:link{
+	COLOR: #002699; TEXT-DECORATION: none
+; font-size: 12px
+}
+a.a2:link{
+	COLOR: white; TEXT-DECORATION: none
+; font-size: 12px
+}
+a.a2:visited{
+	COLOR: white; TEXT-DECORATION: none
+; font-size: 12px
+}
+a.a2:hover{
+	COLOR:white; TEXT-DECORATION: none
+; font-size: 12px;TEXT-DECORATION: underline
+}
+A:visited {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:link {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: red; TEXT-DECORATION: underline
+}
+A:active {
+	COLOR: red; TEXT-DECORATION: underline
+}
+.td1 {
+	FONT-SIZE: 12px; LINE-HEIGHT: 200%
+}
+.1d {
+	COLOR: #ffffff; FILTER: glow(color=FFFFFF,strength=0) dropshadow(color=#FFFFFF,offx=0, offy=0, positive=0); HEIGHT: 20px; MARGIN: 0px; TEXT-DECORATION: none
+}
+.2d {
+	COLOR: #ffffff; FILTER: glow(color=333333,strength=1) dropshadow(color=#aaaaaa,offx=0, offy=0, positive=0); HEIGHT: 20px; MARGIN: 0px; TEXT-DECORATION: none
+}
+.3d {
+	COLOR: #ffffff; FILTER: glow(color=333333,strength=1) dropshadow(color=#aaaaaa,offx=1, offy=1, positive=2); HEIGHT: 20px; MARGIN: 0px; TEXT-DECORATION: none
+}
+.3dfont {
+	FILTER: glow(color=ffffff,strength=0) shadow(color=aaaaaa,direction:135); POSITION: relative; WIDTH: 100%
+}
+
+.title {
+	FONT-SIZE: 9pt; FILTER: DropShadow(Color=ffffff, OffX=1, OffY=1, Positive=1):#ffffff,strength=1); COLOR: #000000; LINE-HEIGHT: 15px; POSITION: relative
+}
+
+table {  font-size: 12px}
+
+.s1 {  font-size: 16px}
+
+.s2 {  height: 15px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; clip:   rect(   )}
+
+.s3 {  margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; border: medium inset; height: 15px; width: 45px; font-size: 10px; font-family: "Arial", "Helvetica", "sans-serif"}
+
+.fmbutton {  border: 1px #000000 solid; background-color: white; clip:  rect(   ); text-align: center; vertical-align: middle}
+
+.fmtext {  BACKGROUND-COLOR: white; BORDER-BOTTOM: #000000 1px solid; BORDER-LEFT: #000000 1px solid; BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-SIZE: 9pt; wrap=hard;}
+
+
+.fmbutton1 {  border: 1px #000000 solid; background-color: white; clip:  rect(   ); text-align: center; vertical-align: middle;height: 18px}
+OPTION{FONT-FAMILY: "����"; FONT-SIZE: 12px}
+INPUT{BORDER-TOP-WIDTH: 1px; PADDING-RIGHT: 1px; PADDING-LEFT: 1px; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 9pt; BORDER-LEFT-COLOR: #cccccc; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #cccccc; PADDING-BOTTOM: 1px; BORDER-TOP-COLOR: #cccccc; PADDING-TOP: 1px; HEIGHT: 18px; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #cccccc; font-family: "����"; font-size: 12px}
+textarea {border-width: 1; border-color: #000000; background-color: #efefef; font-family: "����"; font-size: 12px; font-style: bold;}
+select {border-width: 1; border-color: #000000; background-color: #eeeeee; font-family: "����"; font-size: 12px; font-style: bold;}.ttd {
+	border-top: 0px none;border-bottom: 0px none;border-right: 0px none;border-left: 0px none;
+}
+.ttd1 {
+	border-top: 0px none;border-right: 0px none;
+}
+.ttd2 {
+	border-top: 0px none;border-right: 0px none;border-bottom: 0px none;
+}

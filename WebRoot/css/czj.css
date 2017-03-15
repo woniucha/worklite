@@ -1,0 +1,19 @@
+code.html { color: #191970 }
+code.css { color: #4b0082 }
+p {font:"Î¢ÈíÑÅºÚ";font-size:12px}
+#svp94O { text-indent: 2em }
+P EM { background: yellow }
+P:first-line {font-variant: small-caps;font-weight: bold;font-size:20px}
+P:first-letter { font-size: 100%; float: left }
+H1, H2, H3, H4, H5, H6 {
+    color: red;
+    font-family: sans-serif }
+A:link { color: red }
+A:active { color: blue; font-size: 125% }
+A:visited { color: green; font-size: 85% }
+
+BODY { background: url(bar.gif) white;background-repeat: repeat-x ! important }
+
+
+
+

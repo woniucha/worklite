@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<constant name="struts:objectFactory" value="spring"></constant>
+<constant name="struts.multipart.maxSize" value="20000000"></constant>
+<package name="default" extends="struts-default" namespace="/"> 
+     <interceptors>
+       <interceptor name="authen" class="wtyw.worklite.common.LoginAuthenInterceptor">
+       </interceptor>
+     </interceptors>
+     <global-results>
+        <result name="login" type="redirect">worklite_user_login_redirect.jsp</result>
+     </global-results>
+	 
+	 <!-- 用户登录 -->	 
+	 <action name="login" class="wtyw.worklite.action.WorkliteUserAction"> 
+	    <result name="loginOut">worklite_user_login.jsp</result> 
+	    <result name="loginSuccess">wl_welcome.jsp</result> 
+	    <result name="loginFail">worklite_user_login.jsp</result> 	
+	 </action> 	 
+	 <!-- 用户管理 -->
+	 <action name="user" class="wtyw.worklite.action.WorkliteUserAction"> 
+	    <result name="registerSuccess">worklite_user_register_success.jsp</result> 
+	    <result name="addsuccess">worklite_result.jsp</result>
+	    <result name="findByPage_success">worklite_user_queryAll.jsp</result>
+	    <result name="registerFail">worklite_user_register.jsp</result> 
+	    <result name="queryDetail_success">worklite_user_queryDetail.jsp</result>
+	    <result name="updatequeryDetail_success">worklite_user_update.jsp</result>
+	    <result name="fail">worklite_result.jsp</result> 
+	    <result name="success_findByCondition">worklite_user_query_result.jsp</result>
+	    <result name="updatesuccess">worklite_user_update_success.jsp</result>
+	    <result name="annul_result">worklite_user_annul_result.jsp</result>
+	    <result name="queryTodoing_success">worklite_toDoing_query.jsp</result>
+	 </action> 	 
+	 <!-- 令牌管理 -->
+	<action name="updatetoken" class="wtyw.worklite.action.WorkliteTokenAction">
+		<result name="success">/worklite_token_update_success.jsp</result>
+		<result name="fail">worklite_result.jsp</result>
+		<result name="queryDetail_success">/worklite_token_update.jsp</result>
+	</action>
+	 <action name="token" class="wtyw.worklite.action.WorkliteTokenAction"> 
+		<result name="success">wl_add_Key.jsp</result> 
+		<result name="fail">worklite_result.jsp</result>
+		<result name="addsuccess">worklite_result.jsp</result>
+		<result name="queryDetail_success">worklite_token_queryDetail.jsp</result>
+		<result name="success_findByCondition">worklite_token_query_result.jsp</result>
+		<result name="findByPage_tokenlend_success">worklite_token_lendDetail.jsp</result>
+	    <!-- 令牌领用、归还 -->
+		<result name="useQuery_success">worklite_token_lend.jsp</result>
+		<result name="use_fail">worklite_result.jsp</result>
+		<result name="lend_success">worklite_token_lend_success.jsp</result>	
+		<result name="backQuery_success">worklite_token_return.jsp</result>
+		<result name="return_success">worklite_token_return_success.jsp</result>	
+		<!-- 令牌注销 -->
+		<result name="annul_result">worklite_token_annul_result.jsp</result>	
+	 </action> 
+	 <!-- 知识管理 -->
+	 <action name="knowledge" class="knowledgeAction"> 
+		<result name="success">wl_add_Key.jsp</result> 
+		<result name="fail">worklite_result.jsp</result>
+		<result name="save_success">worklite_result.jsp</result>
+		<result name="add_success">worklite_knowledge_result.jsp</result>
+		<result name="issue_success">worklite_knowledge_issue_success.jsp</result>
+		<result name="rollback_success">worklite_knowledge_rollback_success.jsp</result>
+		<result name="success_findByCondition">worklite_knowledge_query_result.jsp</result>
+		<result name="findByPage_success">wl_admin_Key.jsp</result>
+	    <result name="queryDetail">worklite_knowledge_queryDetail.jsp</result>
+		<result name="editDetail">worklite_knowledge_edit.jsp</result>
+        <result name="checkDetail">worklite_knowledge_check.jsp</result>							
+	 </action> 
+	 <!-- 考勤管理 -->
+	 <action name="check" class="wtyw.worklite.action.WorkliteCheckAction">
+	    <result name="input">error.jsp</result>
+		<result name="success">worklite_result.jsp</result>
+		<result name="success_findByCondition">worklite_checking_queryDetailPersonal.jsp</result>
+	 </action>
+	 <!-- 假期管理 -->
+	 <action name="vacation" class="wtyw.worklite.action.WorkliteVacationAction"> 
+	    <result name="queryUserInfo_success">worklite_vacation_apply.jsp</result>
+		<result name="apply_success">worklite_vacation_result.jsp</result> 
+		<result name="query_all_success">worklite_vacation_queryAll.jsp</result>
+		<result name="verifyByCorp_fail">worklite_vacation_result.jsp</result> 
+		<result name="verifyByCorp_success">worklite_vacation_result.jsp</result>
+		<result name="verifyByBank_fail">worklite_vacation_result.jsp</result> 
+		<result name="verifyByBank_success">worklite_vacation_result.jsp</result>		
+	    <result name="copporation_verify">worklite_vacation_verifyByCorp.jsp</result>
+		<result name="bank_verify">worklite_vacation_verifyByBank.jsp</result>
+        <result name="queryDetail">worklite_vacation_queryDetail.jsp</result>					
+	 </action> 
+	 <!-- 图书管理 -->
+	 <action name="book" class="wtyw.worklite.action.WorkliteBookAction"> 
+	    <result name="fail">worklite_result.jsp</result>
+	    <result name="addsuccess">worklite_result.jsp</result>
+	    <result name="success_findByCondition">worklite_book_query_result.jsp</result> 
+	    <result name="findByPage_lend_success">worklite_book_lendDetail.jsp</result> 
+	    <result name="queryDetail_success">worklite_book_queryDetail.jsp</result> 
+		<result name="annul_result">worklite_result.jsp</result> 
+		<!-- 图书借阅、归还 -->
+		<result name="useQuery_success">worklite_book_lend.jsp</result>
+		<result name="use_fail">worklite_result.jsp</result>	
+		<result name="lend_success">worklite_result.jsp</result>	
+		<result name="backQuery_success">worklite_book_return.jsp</result>
+		<result name="return_success">worklite_book_return_success.jsp</result>		 
+	 </action>
+	 <!-- 图书管理 -->
+	 <action name="updatebook" class="wtyw.worklite.action.WorkliteBookAction">
+		<result name="success">/worklite_book_update_success.jsp</result>
+		<result name="fail">worklite_result.jsp</result>
+		<result name="queryDetail_success">/worklite_book_update.jsp</result>
+	 </action>
+	 <!-- 任务管理 -->
+	 <action name="task" class="taskAction">
+	    <result name="input">error.jsp</result>
+		<result name="add_success">worklite_result.jsp</result>
+		<result name="fail">fail.jsp</result>
+		<result name="queryByPage_success">worklite_task_query.jsp</result>
+	    <result name="toquery">worklite_task_queryDetail.jsp</result>
+		<result name="tohandle">worklite_task_conduct.jsp</result>
+		<result name="handle_success">worklite_result.jsp</result>
+        <result name="toestimate">worklite_task_estimate_1.jsp</result>
+        <result name="toestimate1">worklite_task_estimate_2.jsp</result>
+        <result name="toestimate2">worklite_task_estimate_3.jsp</result>
+        <result name="estimate_success">worklite_task_estimate_success.jsp</result>
+        <result name="toestimatedetail">worklite_task_estimateDetail.jsp</result>	
+        <result name="success_findByCondition">worklite_task_query_result.jsp</result>
+	 </action>
+	 <!-- 附件管理 -->
+	 <action name="upload" class="wtyw.worklite.action.WorkliteUploadAction">
+		<result name="upload_success">worklite_upload_result.jsp</result>
+		<result name="fail">worklite_result.jsp</result>
+		<result name="upload_continue_success">/worklite_book_update.jsp</result>
+		<result name="delete_success">/worklite_book_update.jsp</result>
+	 </action>	 
+	 <!-- 周报、月报 -->
+	 <action name="report" class="wtyw.worklite.action.WorkliteReportAction" >
+	    <result name="fail">worklite_result.jsp</result>
+	 	<result name="success_addReportWeekly">worklite_result.jsp</result>
+	 	<result name="success_addReportMonth">worklite_result.jsp</result>
+	 	<result name="weekly_issue_success">worklite_result.jsp</result>
+	 	<result name="weekly_rollback_success">worklite_result.jsp</result>
+	 	<result name="month_issue_success">worklite_result.jsp</result>
+	 	<result name="month_rollback_success">worklite_result.jsp</result>
+	 	<result name="success_queryReportWeeklyDetail">worklite_report_weekly_check.jsp</result>
+	 	<result name="success_queryReportMonthDetail">worklite_report_month_check.jsp</result>
+	    <result name="success_findByWeeklyCondition">worklite_report_weekly_query_result.jsp</result>
+	 	<result name="success_findByMonthCondition">worklite_report_month_query_result.jsp</result>
+	 </action>
+	 
+	 
+	 <!-- 下载页面下载链接action，成功返回success -->
+	 <action name="download" class="wtyw.worklite.action.DownLoadAction">
+			<param name="inputPath">d:\upload\</param>
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream,image/pjpeg,image/bmp,image/jpg,image/png,image/gif,image/jpeg,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel;charset=ISO8859-1</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="inputName">targetFile</param>
+				<param name="bffersize">40960</param>
+			</result>
+	 </action>
+</package>
+</struts>    
